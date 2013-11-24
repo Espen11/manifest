@@ -1,0 +1,34 @@
+<!doctype html>
+<title>{% block title %}Welcome{% endblock %} | Manifest</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+	<h1>Manifest</h1>
+	<div class=menu>
+  <a href="{{ url_for('new_load') }}">new_load</a> |
+  <a href="{{ url_for('all_loads') }}">all_loads</a> |
+  <a href="{{ url_for('all_users') }}">all users</a> |
+  <a href="{{ url_for('add_user') }}">add user</a> |
+  <a href="{{ url_for('delete_user') }}">delete user</a> |
+  {% if g.user %}
+    <a href="{{ url_for('logout') }}">sign out [{{ g.user.first_name }}]</a>
+  {% else %}
+    <a href="{{ url_for('register') }}">sign up</a> |
+    <a href="{{ url_for('login') }}">sign in</a>
+  {% endif %}
+  </div>
+  {% with flashes = get_flashed_messages() %}
+    {% if flashes %}
+      <ul class=flashes>
+      {% for message in flashes %}
+        <li>{{ message }}
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div class=body>
+  {% block body %}{% endblock %}
+  </div>
+  <div class=footer>
+    Nimbus Manifest
+  </div>
+</div>

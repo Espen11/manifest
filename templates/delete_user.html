@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Delete user</h2>
+  {% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+  <form action="" method=post>
+    <dl>
+      <dt>First name:
+      <dd><input type=text name=first_name size=30>
+      <dt>Last name:
+      <dd><input type=text name=last_name size=30>
+    </dl>
+    <div class=actions><input type=submit value="Delete user"></div>
+  </form>
+{% endblock %}
+

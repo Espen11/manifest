@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>All users</h2>
+
+  <ul class=messages>
+  {% for user in users %}
+      {{ user.first_name }}
+      {{ user.last_name }}
+			<br>
+  {% endfor %}
+  </ul>
+{% endblock %}

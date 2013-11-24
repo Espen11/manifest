@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Load</h2>
+
+  <ul class=messages>
+  {% for l in loads %}
+      {{ l.loasd_id }}
+      {{ l.plane }}
+			<br>
+  {% endfor %}
+  </ul>
+{% endblock %}
