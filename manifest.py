@@ -91,11 +91,13 @@ def index():
 
 @app.route('/new_load', methods=['GET', 'POST'])
 def new_load():
+	planes = query_db('select * from planes')
+	return render_template('new_load.html', planes=planes)
 	if request.method == 'POST':
 		flash(request.form['plane'])
 	
-	userlist = query_db('select * from users')
-	return render_template('new_load.html', users=userlist)
+#	userlist = query_db('select * from users')
+#	return render_template('new_load.html', users=userlist)
 
 
 @app.route('/load/<load_id>')
