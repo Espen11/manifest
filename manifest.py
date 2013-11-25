@@ -91,8 +91,9 @@ def index():
 
 @app.route('/new_load', methods=['GET', 'POST'])
 def new_load():
-
-
+	if request.method == 'POST':
+		flash(request.form['plane'])
+	
 	userlist = query_db('select * from users')
 	return render_template('new_load.html', users=userlist)
 
@@ -100,7 +101,10 @@ def new_load():
 @app.route('/load/<load_id>')
 def show_load(load_id):
 	load = query_db('select * from loads where load_id = ?',[load_id])
-	return render_template('load.html', loads=load)
+	plane_id = load[0][1]
+	plane = query_db('select * from planes where plane_id = ?',[plane_id])
+	plane_name = plane[0][1]
+	return render_template('load.html', loads=load, plane=plane_name)
 
 
 @app.route('/all_loads')

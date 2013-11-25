@@ -4,7 +4,7 @@
 
   <ul class=messages>
   {% for l in loads %}
-			<a href="{{ url_for('show_load',load_id=l.load_id) }}">{{l.load_id}} {{l.plane}}</a>
+			<a href="{{ url_for('show_load',load_id=l.load_id) }}">{{l.load_id}}</a>
 			<br>
   {% endfor %}
   </ul>
