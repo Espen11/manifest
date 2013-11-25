@@ -8,5 +8,17 @@
       {{ plane }}
 			<br>
   {% endfor %}
+	<br>
+  {% for s in slots %}
+      {{ s }}
+			<br>
+  {% endfor %}
+	<form action="" method=post>
+		<dl>
+			<dt>Jumper:
+			<input type=text name=jumper size=30>
+		</dl>
+		<div class=actions><input type=submit value="Add jumper"></div>
+	</form>
   </ul>
 {% endblock %}
