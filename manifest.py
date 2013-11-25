@@ -92,21 +92,34 @@ def index():
 @app.route('/new_load', methods=['GET', 'POST'])
 def new_load():
 	planes = query_db('select * from planes')
-	return render_template('new_load.html', planes=planes)
 	if request.method == 'POST':
-		flash(request.form['plane'])
+		db = get_db()
+		db.execute('insert into loads (plane_id, day) values (?, ?)',
+		                 [request.form['plane'], time.strftime("%d/%m/%Y")])
+		db.commit()
+		flash('Load added')
+	return render_template('new_load.html', planes=planes)
 	
-#	userlist = query_db('select * from users')
-#	return render_template('new_load.html', users=userlist)
 
-
-@app.route('/load/<load_id>')
+@app.route('/load/<load_id>', methods=['GET', 'POST'])
 def show_load(load_id):
+	if request.method == 'POST':
+		db = get_db()
+		db.execute('insert into slot (user_id, load_id) values (?, ?)',
+		                 [get_user_id(request.form['jumper']), load_id])
+		db.commit()
+		flash('Jumper added to load')
+
 	load = query_db('select * from loads where load_id = ?',[load_id])
 	plane_id = load[0][1]
 	plane = query_db('select * from planes where plane_id = ?',[plane_id])
 	plane_name = plane[0][1]
-	return render_template('load.html', loads=load, plane=plane_name)
+	slot = query_db('select * from slot where load_id = ?',[load_id])
+	slots = []
+	for s in slot:
+		user = query_db('select * from users where user_id = ?',[s[0]])
+		slots.append(user[0][1]+' '+user[0][2])
+	return render_template('load.html', loads=load, plane=plane_name, slots=slots)
 
 
 @app.route('/all_loads')
