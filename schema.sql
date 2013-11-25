@@ -28,6 +28,7 @@ drop table if exists loads;
 create table loads (
   load_id integer primary key autoincrement,
 	plane_id integer,
+	day text,
 	foreign key(plane_id) references planes(plane_id)
 );
 
