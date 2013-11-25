@@ -8,17 +8,9 @@
       <dt>Plane:
 			<select name=plane id=plane_dropdown>
 				{% for plane in planes %}
-					<option>{{ plane.name }}</option>
+					<option value={{plane.plane_id}}>{{ plane.name }}</option>
 				{% endfor %}
 			</select>
-			<dt>Last name:
-			<dd><input type=text name=last_name size=30 value="{{ request.form.last_name }}">
-			<dt>E-Mail:
-			<dd><input type=text name=email size=30 value="{{ request.form.email }}">
-			<dt>Password:
-			<dd><input type=password name=password size=30>
-			<dt>Password <small>(repeat)</small>:
-			<dd><input type=password name=password2 size=30>
     </dl>
     <div class=actions><input type=submit value="Add load"></div>
   </form>
